@@ -1,8 +1,18 @@
-#include <QCoreApplication>
+#include "observer.h"
 
-int main(int argc, char *argv[])
+#include <chrono>
+#include <thread>
+
+
+int main()
 {
-    QCoreApplication a(argc, argv);
-
-    return a.exec();
+    Concrete_File test_File("test.txt");
+    File_Observer fist_Observer("test.txt", test_File.file_size());
+    test_File.Attach(&fist_Observer);                                 //привязываем наблюдателей к файлу
+    for(int i = 0; i < 100; i++)
+    {
+    std::this_thread::sleep_for( std::chrono::milliseconds(200));
+    test_File.ChangeFile();
+    }
+    return 0;
 }
