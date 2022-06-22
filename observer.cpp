@@ -1,9 +1,9 @@
 #include "observer.h"
 
 
-File_Observer::File_Observer(QString observer_name, int size) : name(observer_name), size(size) {}
+File_Observer::File_Observer(QString observer_name, int size) : name(observer_name), size(size) {}//конструктор
 
-void File_Observer::Update(int size, bool exist)
+void File_Observer::Update(int size, bool exist)//обновляет информацию о файле
 {
     this->exist = exist;
     if (this->exist)
@@ -27,17 +27,17 @@ void File_Observer::Update(int size, bool exist)
 }
 
 
-void ASubject::Attach(File_Observer* file_observer)
+void ASubject::Attach(File_Observer* file_observer)//добавление наблюдателя
 {
     list.push_back(file_observer);
 }
 
-void ASubject::Detach(File_Observer* file_observer)
+void ASubject::Detach(File_Observer* file_observer)//удалеление наблюдателя
 {
     list.erase(std::remove(list.begin(), list.end(), file_observer), list.end());
 }
 
-void ASubject::Notify(int size, bool exist)
+void ASubject::Notify(int size, bool exist)//обновление информации в наблюдателях
 {
     for (int i = 0; i < list.size(); i++)                   //идем по циклу и обновляем данные в наблюдателях
        if (list[i] != 0)
@@ -45,18 +45,18 @@ void ASubject::Notify(int size, bool exist)
 }
 
 
-Concrete_File::Concrete_File(QString file_name) :file(file_name)
+Concrete_File::Concrete_File(QString file_name) :file(file_name)// создаём и открываем файл
 {
     file.open(QIODevice::ReadOnly | QIODevice::Text);
 }
 
 
-void Concrete_File::ChangeFile()
+void Concrete_File::ChangeFile()// проверка, изменился ли файл
 {
     Notify(file.size(), file.exists());
 }
 
-int Concrete_File::file_size()
+int Concrete_File::file_size()//выводит размер файла
 {
     return file.size();
 }
