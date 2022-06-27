@@ -10,11 +10,11 @@ void File_Observer::Update(int size, bool exist)//обновляет инфор�
     {
         if (size > 0)
         {
-            std::cout << "File exists and size is " << size << std::endl;
             if (size != this->size)
             {
                 std::cout << "File has been modified. Now file size is " << size << std::endl;
             }
+            std::cout << "File exists and size is " << size << std::endl;
         }
         else
             std::cout << "File exists, but its empty "<<std::endl;
@@ -37,7 +37,7 @@ void ASubject::Detach(File_Observer* file_observer)//удалеление наб
     list.erase(std::remove(list.begin(), list.end(), file_observer), list.end());
 }
 
-void ASubject::Notify(int size, bool exist)//обновление информации в наблюдателях
+void ASubject::Notify(int size, bool exist)//обновление информации в наблюдателях   
 {
     for (int i = 0; i < list.size(); i++)                   //идем по циклу и обновляем данные в наблюдателях
        if (list[i] != 0)
