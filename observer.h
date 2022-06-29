@@ -1,4 +1,4 @@
-#ifndef OBSERVER_H
+﻿#ifndef OBSERVER_H
 #define OBSERVER_H
 
 
@@ -11,7 +11,7 @@
 #include <algorithm>
 
 
-class I_Observer
+class I_Observer//абстрактный класс для наблюдателя
 {
 public:
     virtual void Update(int size, bool exist) = 0;
@@ -20,12 +20,12 @@ public:
 
 class File_Observer : I_Observer
 {
-    QString name;
-    int size;
-    bool exist = true;
+    QString name;//имя файла
+    int size;//размер 
+    bool exist = true;//существование фалйа
 public:
-    File_Observer(QString observer_name, int size);
-    void Update(int size, bool exist);
+    File_Observer(QString observer_name, int size);//конструктор наблюдателя
+    void Update(int size, bool exist);//обновляет информацию о файле
 };
 
 
@@ -33,9 +33,9 @@ class ASubject
 {
     std::vector<File_Observer*> list;
 public:
-    void Attach(File_Observer* file_observer);
-    void Detach(File_Observer* file_observer);
-    void Notify(int size, bool exist);
+    void Attach(File_Observer* file_observer);//добавление наблюдателя
+    void Detach(File_Observer* file_observer);//удалеление наблюдателя
+    void Notify(int size, bool exist);//обновление информации в наблюдателях  
 };
 
 
@@ -43,9 +43,9 @@ class Concrete_File : public ASubject
 {
     QFile file;
 public:
-    Concrete_File(QString file_name);
-    void ChangeFile();
-    int file_size();
+    Concrete_File(QString file_name);//конструктор
+    void ChangeFile();//проверяем изменился ли файл
+    int file_size();//метод возвращающая размер файла
 };
 
 
