@@ -1,5 +1,5 @@
 #include "observer.h"
-
+#include <QDebug>
 
 File_Observer::File_Observer(QString observer_name, int size) : name(observer_name), size(size) {}//конструктор
 
@@ -12,16 +12,16 @@ void File_Observer::Update(int size, bool exist)//обновляет инфор�
         {
             if (size != this->size)//смотрим был ли изменён размер файла
             {
-                std::cout << "File has been modified. Now file size is " << size << std::endl;
+                qDebug() << "File has been modified. Now file size is " << size << std::endl;
             }
-            std::cout << "File exists and size is " << size << std::endl;
+            qDebug() << "File exists and size is " << size << std::endl;
         }
         else
-            std::cout << "File exists, but its empty "<<std::endl;
+            qDebug() << "File exists, but its empty "<<std::endl;
     }
     else
     {
-        std::cout << "File doesn't exist.\n";
+        qDebug() << "File doesn't exist.\n";
     }
     this->size = size;//обновляем размер файла
 }
@@ -45,9 +45,8 @@ void ASubject::Notify(int size, bool exist)//обновление информа
 }
 
 
-Concrete_File::Concrete_File(QString file_name) :file(file_name)// создаём и открываем файл
+Concrete_File::Concrete_File(QString file_name) :file(file_name)//открываем файл
 {
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
 }
 
 

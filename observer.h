@@ -34,7 +34,7 @@ class ASubject
     std::vector<File_Observer*> list;
 public:
     void Attach(File_Observer* file_observer);//добавление наблюдателя
-    void Detach(File_Observer* file_observer);//удалеление наблюдателя
+    void Detach(File_Observer* file_observer);//отключение наблюдателя
     void Notify(int size, bool exist);//обновление информации в наблюдателях  
 };
 
